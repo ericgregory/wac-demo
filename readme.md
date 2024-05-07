@@ -1,6 +1,6 @@
 # WebAssembly Compositions (WAC) Demo
 
-[WebAssembly Compositions (WAC)](https://github.com/bytecodealliance/wac) is a CLI tool and language for combining WebAssembly components created by Peter Heune and hosted by the Bytecode Alliance. This is a hands-on demo for WAC based heavily (i.e., almost entirely) on a demo that Peter gave at the 2024 Bytecode Alliance Plumbers' Summit. 
+[WebAssembly Compositions (WAC)](https://github.com/bytecodealliance/wac) is a CLI tool and language for combining WebAssembly components created by [Peter Heune](https://github.com/peterhuene) and hosted by the [Bytecode Alliance](https://github.com/bytecodealliance). This is a hands-on demo for WAC based heavily (i.e., almost entirely) on a demo that Peter gave at the 2024 Bytecode Alliance Plumbers' Summit. 
 
 The contents of this repo include:
 
@@ -12,7 +12,7 @@ The contents of this repo include:
 
 In this demo, we'll use the composition instructions defined in our `composition.wac` file to combine three components (a `greeter` written in Go and `terminal` and `cli` components written in Rust) into a single component that returns CLI output when we run it with the Wasmtime WebAssembly runtime. 
 
-## Requirement
+## Requirements
 
 The only strict requirements for running this demo are [`cargo`](https://doc.rust-lang.org/cargo/getting-started/installation.html) and [WAC](https://github.com/bytecodealliance/wac) itself, since compiled Wasm components are provided. If you would like to compile the components on your own, you'll need tools to compile to a wasip2 target from Rust and Go. The components here were built with:
 
@@ -32,7 +32,7 @@ cargo install wac-cli
 Clone or download this repository:
 
 ```shell
-https://github.com/ericgregory/wac-demo.git
+git clone https://github.com/ericgregory/wac-demo.git
 ```
 
 At the root of the project directory, run WAC:
