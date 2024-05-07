@@ -1,0 +1,6 @@
+package demo:rust;
+
+world greeter {
+    import next: func() -> string;
+    export greet: func() -> string;
+}

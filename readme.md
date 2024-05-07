@@ -5,12 +5,14 @@
 The contents of this repo include:
 
 * `/golang`: A directory containing a Go greeter project and compiled component
-* `/cli`: A directory containing a Rust cli project and compiled component
-* `/terminal`: A directory containing a Rust terminal project and compiled component
-* `composition.wac`: The file defining how the components above should be combined ("composed")
-* `/reference`: Purely for reference, a copy of the WIT used by the components and a copy of the final WebAssembly component after running through the demo
+* `/js`: A directory containing a JavaScript greeter project and compiled component
+* `/rust`: A directory containing a Rust greeter project and compiled component
+* `/cli`: A directory containing a Rust CLI project and compiled component
+* `/terminal`: A directory containing a Rust project and compiled component
+* `composition.wac`: The file defining how components should be combined ("composed")
+* `/reference`: Copies of the greeter WIT, final components, and the final `composition.wac`
 
-In this demo, we'll use the composition instructions defined in our `composition.wac` file to combine three components (a `greeter` written in Go and `terminal` and `cli` components written in Rust) into a single component that returns CLI output when we run it with the Wasmtime WebAssembly runtime. 
+In this demo, we'll use the composition instructions defined in our `composition.wac` file to combine multiple components  into a single component that returns CLI output when we run it with the Wasmtime WebAssembly runtime. 
 
 ## Requirements
 
@@ -48,4 +50,50 @@ The `cli` component prints "Hello from" and the Go-based `greeter` component pas
 ```shell
 wasmtime composed.wasm
 Hello from Golang!
+```
+
+This example is built to be extended via the `next` function. If we like, we can extend it indefinitely with a chain of additional greetings. 
+
+We haven't used the `js` and `rust` greeter components so far. Let's add them to `composition.wac` (you can find a copy of the updated file in `reference`):
+
+```
+package demo:service;
+
+let terminal = new demo:terminal {
+    ...
+};
+
+let rust = new demo:rust {
+    next: terminal.greet,
+    ...
+};
+
+let js = new demo:js {
+    next: rust.greet,
+    ...
+};
+
+let golang = new demo:golang {
+    next: js.greet,
+    ...
+};
+
+let cli = new demo:cli {
+    greet: golang.greet,
+    ...
+};
+
+export cli ... ;
+```
+Now run `wac encode` again, adding the component dependencies for the JavaScript and Rust greeters:
+
+```shell
+wac encode --dep demo:terminal=./terminal/target/wasm32-wasi/debug/terminal.wasm --dep demo:golang=./golang/build/greeter.wasm --dep demo:cli=./cli/target/wasm32-wasi/debug/cli.wasm --dep demo:rust=./rust/target/wasm32-wasi/debug/rust.wasm --dep demo:js=./js/greeter.wasm -o composed.wasm composition.wac
+```
+
+When we run `composed.wasm` again:
+
+```shell
+wasmtime composed.wasm
+Hello from Golang and JavaScript and Rust!
 ```

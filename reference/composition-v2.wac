@@ -1,0 +1,27 @@
+package demo:service;
+
+let terminal = new demo:terminal {
+    ...
+};
+
+let rust = new demo:rust {
+    next: terminal.greet,
+    ...
+};
+
+let js = new demo:js {
+    next: rust.greet,
+    ...
+};
+
+let golang = new demo:golang {
+    next: js.greet,
+    ...
+};
+
+let cli = new demo:cli {
+    greet: golang.greet,
+    ...
+};
+
+export cli ... ;
