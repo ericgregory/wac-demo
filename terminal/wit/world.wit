@@ -1,0 +1,6 @@
+package demo:terminal;
+
+world greeter {
+    import next: func() -> string;
+    export greet: func() -> string;
+}

@@ -1,0 +1,17 @@
+package demo:service;
+
+let terminal = new demo:terminal {
+    ...
+};
+
+let golang = new demo:golang {
+    next: terminal.greet,
+    ...
+};
+
+let cli = new demo:cli {
+    greet: golang.greet,
+    ...
+};
+
+export cli ... ;

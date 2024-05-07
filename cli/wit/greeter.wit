@@ -1,0 +1,5 @@
+package demo:cli;
+
+world greeter {
+    import greet: func() -> string;
+}
