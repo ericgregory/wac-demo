@@ -12,7 +12,7 @@ The contents of this repo include:
 * `composition.wac`: The file defining how components should be combined ("composed")
 * `/reference`: Copies of the greeter WIT, final components, and the final `composition.wac`
 
-In this demo, we'll use the composition instructions defined in our `composition.wac` file to combine multiple components  into a single component that returns CLI output when we run it with the Wasmtime WebAssembly runtime. 
+In this demo, we'll explore how you can encode more complex compositions using the WAC language. We'll use the instructions defined in our `composition.wac` file to combine multiple components into a single component that returns CLI output when we run it with the Wasmtime WebAssembly runtime.
 
 ## Requirements
 
